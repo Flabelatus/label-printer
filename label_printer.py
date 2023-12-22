@@ -51,7 +51,7 @@ class LabelPrinter:
         - barcode_type (str): The type of barcode ('Q', 'X', 'U').
         - x (int): The x-coordinate for placing the barcode.
         - y (int): The y-coordinate for placing the barcode.
-        - **kwargs: Additional keyword arguments for barcode customization.
+        - **kwargs
         """
         self._set_origin(x, y)
         self.label.barcode(
@@ -60,7 +60,12 @@ class LabelPrinter:
             height=kwargs.get("height", 50),
             check_digit=kwargs.get("check_digit", "Y"),
             orientation=kwargs.get("orientation", "N"),
-            magnification=kwargs.get("magnification", 2)
+            magnification=kwargs.get("magnification", 2),
+            mask=kwargs.get("mask", "7"),
+            mode=kwargs.get("mode", "N"),
+            errorCorrection=kwargs.get("errorCorrection", "Q"),
+            print_interpretation_line_above=kwargs.get("print_interpretation_line_above", "N"),
+            print_interpretation_line=kwargs.get("print_interpretation_line", "Y")
         )
         self._end_origin()
 
@@ -71,13 +76,31 @@ class LabelPrinter:
         Parameters:
         - x (int): The x-coordinate for placing the text.
         - y (int): The y-coordinate for placing the text.
-        - **kwargs: Additional keyword arguments for text customization.
+
+        - char_height: Any = None,
+        - char_width: Any = None,
+        - font: str = '0',
+        - orientation: str = 'N',
+        - line_width: Any = None,
+        - max_line: int = 1,
+        - line_spaces: int = 0,
+        - justification: str = 'L',
+        - hanging_indent: int = 0,
+        - qrcode: bool = False -> Any
         """
         self._set_origin(x, y)
         self.label.write_text(
-            text=kwargs.get("char"),
+            text=kwargs.get("text", ""),
             char_height=kwargs.get("char_height"),
-            char_width=kwargs.get("char_width")
+            char_width=kwargs.get("char_width"),
+            font=kwargs.get("font", '0'),
+            orientation=kwargs.get("orientation", "N"),
+            line_width=kwargs.get("line_width"),
+            max_line=kwargs.get("max_line", 1),
+            line_spaces=kwargs.get("line_spaces", 0),
+            justification=kwargs.get("justification", "L"),
+            hanging_indent=kwargs.get("hanging_indent", 0),
+            qrcode=kwargs.get("qrcode", False)
         )
         self._end_origin()
 
@@ -89,6 +112,17 @@ class LabelPrinter:
         - x (int): The x-coordinate for placing the QR code.
         - y (int): The y-coordinate for placing the QR code.
         - **kwargs: Additional keyword arguments for QR code customization.
+
+        - code: Any,
+        - height: int = 70,
+        - orientation: str = 'N',
+        - check_digit: str = 'N',
+        - print_interpretation_line: str = 'Y',
+        - print_interpretation_line_above: str = 'N',
+        - magnification: int = 1,
+        - errorCorrection: str = 'Q',
+        - mask: str = '7',
+        - mode: str = 'N'
         """
         self._add_barcode('Q', x, y, **kwargs)
 
@@ -100,6 +134,18 @@ class LabelPrinter:
         - x (int): The x-coordinate for placing the matrix code.
         - y (int): The y-coordinate for placing the matrix code.
         - **kwargs: Additional keyword arguments for matrix code customization.
+
+        - code: Any,
+        - height: int = 70,
+        - orientation: str = 'N',
+        - check_digit: str = 'N',
+        - print_interpretation_line: str = 'Y',
+        - print_interpretation_line_above: str = 'N',
+        - magnification: int = 1,
+        - errorCorrection: str = 'Q',
+        - mask: str = '7',
+        - mode: str = 'N'
+
         """
         self._add_barcode('X', x, y, **kwargs)
 
@@ -111,6 +157,18 @@ class LabelPrinter:
         - x (int): The x-coordinate for placing the barcode.
         - y (int): The y-coordinate for placing the barcode.
         - **kwargs: Additional keyword arguments for barcode customization.
+
+        - code: Any,
+        - height: int = 70,
+        - orientation: str = 'N',
+        - check_digit: str = 'N',
+        - print_interpretation_line: str = 'Y',
+        - print_interpretation_line_above: str = 'N',
+        - magnification: int = 1,
+        - errorCorrection: str = 'Q',
+        - mask: str = '7',
+        - mode: str = 'N'
+
         """
         self._add_barcode('U', x, y, **kwargs)
 
@@ -126,8 +184,8 @@ class LabelPrinter:
         except IndexError as err:
             print("Error from printer, no destinations added")
 
-    def preview_label(self):
+    def preview_label(self, index=0):
         """
         Displays a preview of the generated label.
         """
-        self.label.preview()
+        self.label.preview(index=index)

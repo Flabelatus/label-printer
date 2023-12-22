@@ -34,10 +34,10 @@ The project consists of a `LabelPrinter` class that provides methods to add text
 
 3. Modify the parameters with your label specifications.
 
-4. Run the script:
+4. Run the example script:
 
     ```bash
-    python main.py
+    python example.py
     ```
 
 5. Zebra printer usage
