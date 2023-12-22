@@ -1,6 +1,6 @@
 # Label Printing with Zebra
 
-This Python project demonstrates label generation and printing using Zebra printers and the ZPL (Zebra Programming Language) library.
+This Python project demonstrates label generation and printing using Zebra printers and the ZPL library.
 
 ## Overview
 
