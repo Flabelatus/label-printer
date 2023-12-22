@@ -1,4 +1,4 @@
-from main import LabelPrinter
+from label_printer import LabelPrinter
 
 STICKER_HEIGHT = 17
 STICKER_WIDTH = 38
