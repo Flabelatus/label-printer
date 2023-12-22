@@ -13,7 +13,7 @@ def example():
     sticker = LabelPrinter(STICKER_HEIGHT, STICKER_WIDTH)
 
     # Add text
-    sticker.add_text(x=2, y=2, char="EXAMPLE #0001")
+    sticker.add_text(x=2, y=2, text="EXAMPLE #0001")
 
     # Add Barcode
     sticker.add_barcode(x=3, y=6, height=30, code=URL)
